@@ -14,6 +14,7 @@ Matrice* matrice_clone(Matrice** destination, const Matrice* source);
 
 Matrice* matrice_add(const Matrice* matrix1, const Matrice* matrix2);
 Matrice* matrice_multiply(const Matrice* matrix1, const Matrice* matrix2);
+Matrice* matrice_scalar_multiply(const Matrice* matrix, const double value);
 Matrice* matrice_transpose(const Matrice* matrix);
 Matrice* matrice_inverse(const Matrice* matrix);
 

@@ -117,6 +117,22 @@ Matrice* matrice_multiply(const Matrice* matrix1, const Matrice* matrix2)
     return new_matrix;
 }
 
+Matrice* matrice_scalar_multiply(const Matrice* matrix, const double value)
+{
+    if(!matrix)
+        return NULL;
+
+    Matrice* new_matrix = matrice_init(matrix->y, matrix->x);
+    if(!new_matrix)
+        return NULL;
+
+    for(size_t y = 0; y < new_matrix->y; ++y)
+        for(size_t x = 0; x < new_matrix->x; ++x)
+            new_matrix->values[y][x] = matrix->values[y][x] * value;
+
+    return new_matrix;
+}
+
 Matrice* determinant_reduce(const Matrice* matrix, const size_t x_split, const size_t y_split)
 {
     if(!matrix || x_split < 0 || y_split < 0)
