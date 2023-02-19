@@ -16,7 +16,7 @@
 |int list_get_value(Node* head, const int index);                   | Returns the value of a Node in the specified position. |
 |int list_get_first(Node* head);                                    | Returns the value of the first Node. |
 |int list_get_last(Node* head);                                     | Returns the value of the last Node. |
-|int list_is_empty(Node* head);                                     | Returns 1 if the size of the list is 0, otherwise 0 |
+|int list_is_empty(Node* head);                                     | Returns 1 if the size of the List is 0, otherwise 0 |
 |int list_is_full();                                                | Returns 1 if no memory can be allocated for a new Node, otherwise 0 |
 |char* list_to_string(Node* head);                                  | Converts the values of a List to a string. Returns a pointer to the start of the string, otherwise NULL |
 |void list_sort(Node** head);                                       | Sorts a List in ascending order |
