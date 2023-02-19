@@ -28,6 +28,7 @@ int list_is_empty(Node* head);
 int list_is_full();
 
 char* list_to_string(Node* head);
+void list_sort(Node** head);
 void list_destroy(Node** head);
 
 #endif // LINKEDLIST_H_INCLUDED

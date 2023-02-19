@@ -284,3 +284,62 @@ char* list_to_string(Node* head)
     return string;
 }
 
+Node* split_after(Node* head, const int amount)
+{
+    Node* rest = head;
+    Node** prev = NULL;
+
+    for(int i = 0; rest && i < amount; ++i)
+    {
+        prev = &rest->next;
+        rest = rest->next;
+    }
+
+    if(prev)
+        *prev = NULL;
+
+    return rest;
+}
+
+void merge_lists(Node*** out_tail, Node* head1, Node* head2)
+{
+    while(head1 || head2)
+    {
+        Node** min_node = !head2 || (head1 && head1->value <= head2->value) ? &head1 : &head2;
+        **out_tail = *min_node;
+        *min_node = (*min_node)->next;
+        (**out_tail)->next = NULL;
+        *out_tail = &(**out_tail)->next;
+    }
+}
+
+void list_sort(Node** head)
+{
+    if(!head || !(*head))
+        return;
+
+    Node* current = *head;
+    int length = 1, sorted = 0;
+
+    while(!sorted)
+    {
+        Node* out_head = NULL;
+        Node** out_tail = &out_head;
+        sorted = 1;
+
+        while(current)
+        {
+            Node* head1 = current;
+            Node* head2 = split_after(head1, length);
+            current = split_after(head2, length);
+
+            if(sorted && head2)
+                sorted = 0;
+
+            merge_lists(&out_tail, head1, head2);
+        }
+        length *= 2;
+        current = out_head;
+    }
+    *head = current;
+}
