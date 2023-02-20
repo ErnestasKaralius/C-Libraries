@@ -5,8 +5,8 @@
 | Matrix* matrix_init(const size_t x, const size_t y);                     | Returns a pointer to a Matrix of specified size filled with 0's, otherwise NULL |
 | Matrix* matrix_init_unitary(const size_t x, const size_t y);             | Returns a pointer to a Unitary Matrix of specified size, otherwise NULL |
 | Matrix* matrix_clone(Matrix** destination, const Matrix* source);      | Clones the source Matrix to destination. Returns a pointer to the cloned Matrix, otherwise NULL. Destination can be NULL |
-| Matrix* matrix_add(const Matrix* matrix1, const Matrix* matrix2);      | Adds two Matrixs together. Returns a pointer to the new Matrix, otherwise NULL |
-| Matrix* matrix_multiply(const Matrix* matrix1, const Matrix* matrix2); | Multiplies two Matrixs together. Returns a pointer to the new Matrix, otherwise NULL |
+| Matrix* matrix_add(const Matrix* matrix1, const Matrix* matrix2);      | Adds two Matrices together. Returns a pointer to the new Matrix, otherwise NULL |
+| Matrix* matrix_multiply(const Matrix* matrix1, const Matrix* matrix2); | Multiplies two Matrices together. Returns a pointer to the new Matrix, otherwise NULL |
 |Matrix* matrix_scalar_multiply(const Matrix* matrix, const double value);| Multiplies a Matrix by a value. Returns a pointer to a new Matrix, otherwise NULL |
 |Matrix* matrix_transpose(const Matrix* matrix);                          | Transposes a Matrix. Returns a pointer to the transposed Matrix, otherwise NULL
 | Matrix* matrix_inverse(const Matrix* matrix);                           | Inverses a Matrix. Returns a pointer to the inversed Matrix, otherwise NULL |
