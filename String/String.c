@@ -462,6 +462,14 @@ String* string_trim(String* string)
 
 char* string_get_chars(const String* string)
 {
+    if(!str)
+        return NULL;
+
+    return string->str;
+}
+
+char* string_copy_chars(const String* string)
+{
     char* str = malloc(string->size + 1);
     if(!str)
         return NULL;

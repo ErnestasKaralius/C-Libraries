@@ -66,6 +66,7 @@ int string_last_index_of_str_from(const String* string, const String* substring,
 size_t string_get_length(const String* string);
 char string_char_at(const String* string, const size_t index);
 char* string_get_chars(const String* string);
+char* string_copy_chars(const String* string);
 
 void string_destroy(String** string);
 
