@@ -265,7 +265,7 @@ char* matrix_to_string(const Matrix* matrix)
 
             if(length + 1 > capacity) // Account for potential '\n'
             {
-                capacity = (capacity * 2) + length;
+                capacity = (capacity << 1) + length;
                 char* new_ptr = realloc(string, capacity + 1);
                 if(!new_ptr)
                     return string;
