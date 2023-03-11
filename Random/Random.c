@@ -38,10 +38,3 @@ char* rand_str(const size_t length)
 
     return str;
 }
-
-int main(void)
-{
-    printf("Hello, world!");
-
-    return 0;
-}
