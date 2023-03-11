@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include "../StringExtra/StringExtra.c"
 #include "Matrix.h"
 
 #define INITIAL_STR_LENGTH 100
@@ -60,9 +61,9 @@ Matrix* matrix_init_unitary(const size_t x, const size_t y)
     return matrix;
 }
 
-Matrix* matrix_clone(Matrix** destination, const Matrix* source)
+Matrix* matrix_clone(Matrix* destination, const Matrix* source)
 {
-    if(!source)
+    if(!source || destination == source)
         return NULL;
 
     Matrix* new_matrix = matrix_init(source->x, source->y);
@@ -70,11 +71,11 @@ Matrix* matrix_clone(Matrix** destination, const Matrix* source)
         return NULL;
 
     if(!destination)
-        destination = &new_matrix;
+        destination = new_matrix;
     else
     {
-        matrix_destroy(destination);
-        *destination = new_matrix;
+        matrix_destroy(&destination);
+        destination = new_matrix;
     }
 
     for(size_t y = 0; y < new_matrix->y; ++y)
@@ -255,7 +256,7 @@ char* matrix_to_string(const Matrix* matrix)
         for(size_t x = 0; x < matrix->x; ++x)
         {
             char temp_string[MAX_DOUBLE_LENGTH + 1];
-            length += snprintf(temp_string, MAX_DOUBLE_LENGTH, "%.2f ", matrix->values[y][x]);
+            length += snprintf(temp_string, MAX_DOUBLE_LENGTH + 1, "%.2f ", matrix->values[y][x]);
 
             if(length > buffer_capacity - 1)
             {
@@ -266,9 +267,9 @@ char* matrix_to_string(const Matrix* matrix)
 
                 string = new_ptr;
             }
-            strncat(string, temp_string, buffer_capacity - 1);
+            strlcat(string, temp_string, buffer_capacity);
         }
-        strncat(string, "\n\0", buffer_capacity - 1);
+        strlcat(string, "\n\0", buffer_capacity);
     }
 
     return string;

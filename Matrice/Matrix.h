@@ -1,7 +1,7 @@
 #ifndef MATRICES_H_INCLUDED
 #define MATRICES_H_INCLUDED
 
-#include <stdio.h>
+#define size_t unsigned long
 
 typedef struct Matrix {
     size_t x, y;
@@ -10,7 +10,7 @@ typedef struct Matrix {
 
 Matrix* matrix_init(const size_t x, const size_t y);
 Matrix* matrix_init_unitary(const size_t x, const size_t y);
-Matrix* matrix_clone(Matrix** destination, const Matrix* source);
+Matrix* matrix_clone(Matrix* destination, const Matrix* source);
 
 Matrix* matrix_add(const Matrix* matrix1, const Matrix* matrix2);
 Matrix* matrix_multiply(const Matrix* matrix1, const Matrix* matrix2);
