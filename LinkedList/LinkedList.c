@@ -277,7 +277,7 @@ char* list_to_string(Node* head)
 
         if(length > capacity)
         {
-            capacity = (capacity * 2) + length;
+            capacity = (capacity << 1) + length;
             char* new_ptr = realloc(string, capacity + 1);
             if(!new_ptr)
                 return string;
