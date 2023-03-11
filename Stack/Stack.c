@@ -4,7 +4,7 @@
 #include "Stack.h"
 
 #define INITIAL_STR_LENGTH 100
-#define MAX_INT_LENGTH 11
+#define MAX_INT_LENGTH snprintf(NULL, 0, "%d", __INT_MAX__)
 
 Stack* stack_init(const size_t capacity)
 {
@@ -130,27 +130,29 @@ char* stack_to_string(const Stack* stack)
     if(!stack)
         return NULL;
 
-    char* string = calloc(INITIAL_STR_LENGTH, sizeof(char*));
-    size_t buffer_capacity = INITIAL_STR_LENGTH;
+    size_t capacity = INITIAL_STR_LENGTH;
     size_t length = 0;
+    char* string = calloc(capacity + 1, sizeof(char*));
+    if(!string)
+        return NULL;
 
     size_t index = 0;
     while(index < stack->size)
     {
-        char temp_string[MAX_INT_LENGTH + 1];
-        length += snprintf(temp_string, MAX_INT_LENGTH + 1, "%d ", stack->array[index]);
+        char temp_string[MAX_INT_LENGTH + 2]; // '/0' + space
+        length += snprintf(temp_string, MAX_INT_LENGTH + 2, "%d ", stack->array[index]);
 
-        if(length > buffer_capacity - 1)
+        if(length > capacity)
         {
-            buffer_capacity = buffer_capacity * 2 + length;
-            char* new_ptr = realloc(string, buffer_capacity);
+            capacity = (capacity * 2) + length;
+            char* new_ptr = realloc(string, capacity + 1);
             if(!new_ptr)
                 return string;
 
             string = new_ptr;
         }
 
-        strlcat(string, temp_string, buffer_capacity);
+        strlcat(string, temp_string, capacity + 1);
         ++index;
     }
 

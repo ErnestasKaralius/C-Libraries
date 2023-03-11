@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 int rand_int(const int low, const int high)
 {
@@ -36,4 +37,11 @@ char* rand_str(const size_t length)
     str[length] = '\0';
 
     return str;
+}
+
+int main(void)
+{
+    printf("Hello, world!");
+
+    return 0;
 }

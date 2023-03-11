@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "LinkedList.h"
+#include "../LinkedList/LinkedList.c"
 #include "Queue.h"
 
 Queue* queue_init()
