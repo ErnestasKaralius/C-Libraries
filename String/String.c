@@ -325,9 +325,14 @@ String* string_clear(String* string)
     if(!string)
         return NULL;
 
-    memset(string->str, 0, string->size);
-    string->size = 0;
+    char* new_str = realloc(string->str, 1);
+    if(!new_str)
+        return NULL;
 
+    string->str = new_str;
+    string->size = 0;
+    string->str[0] = 0;
+    
     return string;
 }
 
@@ -462,7 +467,7 @@ String* string_trim(String* string)
 
 char* string_get_chars(const String* string)
 {
-    if(!str)
+    if(!string)
         return NULL;
 
     return string->str;
