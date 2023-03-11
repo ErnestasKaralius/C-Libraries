@@ -27,7 +27,7 @@ char* rand_str(const size_t length)
     if(length == 0)
         return NULL;
 
-    char* str = calloc(length + 1, sizeof(char*));
+    char* str = malloc((length + 1) * sizeof(char*));
     if(!str)
         return NULL;
 
