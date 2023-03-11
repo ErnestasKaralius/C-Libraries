@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../StringExtra/StringExtra.c"
 #include "LinkedList.h"
 
 #define INITIAL_STR_LENGTH 100
@@ -217,7 +218,7 @@ int list_is_full()
 
 Node* list_clone(Node** destination, Node* source)
 {
-    if(!source || *destination == source)
+    if(!source)
         return NULL;
 
     if(!destination)
@@ -226,7 +227,12 @@ Node* list_clone(Node** destination, Node* source)
         destination = &temp_dest;
     }
     else
-        list_destroy(destination);
+    {
+        if(*destination == source)
+            return NULL;
+            
+       list_destroy(destination);
+    }
 
     while(source)
     {
@@ -265,7 +271,7 @@ char* list_to_string(Node* head)
     while(head)
     {
         char temp_string[MAX_INT_LENGTH + 1];
-        length += snprintf(temp_string, MAX_INT_LENGTH, "%d ", list_get_first(head));
+        length += snprintf(temp_string, MAX_INT_LENGTH + 1, "%d ", list_get_first(head));
 
         if(length > buffer_capacity - 1)
         {
@@ -277,31 +283,31 @@ char* list_to_string(Node* head)
             string = new_ptr;
         }
 
-        strncat(string, temp_string, buffer_capacity - 1);
+        strlcat(string, temp_string, buffer_capacity);
         head = head->next;
     }
 
     return string;
 }
 
-Node* split_after(Node* head, const int amount)
+static Node* split_after(Node* head, const int amount)
 {
-    Node* rest = head;
-    Node** prev = NULL;
+    Node* current = head;
+    Node** previous = NULL;
 
-    for(int i = 0; rest && i < amount; ++i)
+    for(int i = 0; current && i < amount; ++i)
     {
-        prev = &rest->next;
-        rest = rest->next;
+        previous = &current->next;
+        current = current->next;
     }
 
-    if(prev)
-        *prev = NULL;
+    if(previous)
+        *previous = NULL;
 
-    return rest;
+    return current;
 }
 
-void merge_lists(Node*** out_tail, Node* head1, Node* head2)
+static void merge_lists(Node*** out_tail, Node* head1, Node* head2)
 {
     while(head1 || head2)
     {

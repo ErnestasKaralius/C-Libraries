@@ -33,7 +33,7 @@ int queue_is_full()
 
 int queue_peek(const Queue* queue)
 {
-    return queue->front->value;
+    return queue ? queue->front->value : 0;
 }
 
 int queue_enqueue(Queue* queue, const int value)
