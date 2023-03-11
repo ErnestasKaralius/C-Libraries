@@ -53,12 +53,13 @@ int queue_enqueue(Queue* queue, const int value)
 
 int queue_dequeue(Queue* queue)
 {
+    int value = queue->front->value;
     if(!queue || !list_delete(&(queue->front), 0))
         return 0;
 
     queue->size--;
 
-    return 1;
+    return value;
 }
 
 Queue* queue_clone(Queue* destination, const Queue* source)
